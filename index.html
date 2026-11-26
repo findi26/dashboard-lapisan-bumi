@@ -367,6 +367,7 @@ function renderSiswa(){
       <button class="btn btn-sm btn-ghost" id="btnLogout">Keluar</button>
     </div>
     <div class="sidebar">
+      <button class="tab ${siswaTab==='game'?'active':''}" data-tab="game">🎮 Game</button>
       <button class="tab ${siswaTab==='materi'?'active':''}" data-tab="materi">📚 Materi</button>
       <button class="tab ${siswaTab==='kuis'?'active':''}" data-tab="kuis">❓ Kuis</button>
       <button class="tab ${siswaTab==='profil'?'active':''}" data-tab="profil">🏅 Profil</button>
@@ -375,9 +376,20 @@ function renderSiswa(){
   document.getElementById('btnLogout').onclick=()=>{ state.role=null; save(); render(); };
   document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ siswaTab=t.dataset.tab; renderSiswa(); });
   const c=document.getElementById('siswaContent');
-  if(siswaTab==='materi') renderSiswaMateri(c);
+  if(siswaTab==='game') renderSiswaGame(c);
+  else if(siswaTab==='materi') renderSiswaMateri(c);
   else if(siswaTab==='kuis') renderSiswaKuis(c);
   else renderSiswaProfil(c);
+}
+
+function renderSiswaGame(c){
+  c.innerHTML = `<div class="card" style="padding:0;overflow:hidden;">
+    <div style="padding:12px 16px;border-bottom:2px solid #E4D5C0;">
+      <h2 style="margin:0;">🎮 Game Petualangan Ke Bawah Tanah Bumi</h2>
+      <p style="opacity:.7;margin:4px 0 0;font-size:.9rem;">Mainkan game lapisan bumi di bawah ini. Materi & kuis ada di tab sebelah.</p>
+    </div>
+    <iframe src="https://findi26.github.io/petualangan-bumi/" style="width:100%;height:70vh;border:0;display:block;" title="Game Lapisan Bumi" loading="lazy"></iframe>
+  </div>`;
 }
 
 function renderSiswaMateri(c){
